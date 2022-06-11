@@ -1,11 +1,11 @@
-const { user } = require("../model");
-const db = require("../model");
-const User = db.user;
-const Role = db.role;
-const Transaction = require("./transaction.controller");
+import { user } from "../model";
+import { user as _user, role } from "../model";
+const User = _user;
+const Role = role;
+import { createTransaction } from "./transaction.controller";
 
 // ---------------------------------- Find user by ID ------------------------------
-exports.getById = (req, res) => {
+export function getById(req, res) {
   console.log("called: getById");
   User.findById(req.params.id, function (err, user) {
     if (err) {
@@ -18,10 +18,10 @@ exports.getById = (req, res) => {
       });
     }
   });
-};
+}
 
 // ---------------------------------- Get user's balance by ID ------------------------------
-exports.getUserBalanceById = (req, res) => {
+export function getUserBalanceById(req, res) {
   console.log("called: getUserBalanceById");
   User.findById(req.params.id, function (err, user) {
     if (err) {
@@ -33,10 +33,10 @@ exports.getUserBalanceById = (req, res) => {
       });
     }
   });
-};
+}
 
 // ---------------------------------- Get all the users ------------------------------
-exports.getAll = (req, res) => {
+export function getAll(req, res) {
   console.log("called: getAll");
   let usersList = [];
   User.find({})
@@ -68,10 +68,10 @@ exports.getAll = (req, res) => {
         });
       }
     });
-};
+}
 
 // ---------------------------------- Update's user balance by id ------------------------------
-exports.updateUserBalanceById = (req, res) => {
+export function updateUserBalanceById(req, res) {
   console.log("called: updateUserBalanceById");
   const newBalance = Number(req.body.balance);
   const transAmount = Number(req.body.amount);
@@ -83,7 +83,7 @@ exports.updateUserBalanceById = (req, res) => {
       if (err) next(err);
       else {
         //now we emulate posting by creating a transaction record in the table
-        Transaction.createTransaction(
+        createTransaction(
           user.acct,
           transAmount,
           transType,
@@ -97,9 +97,9 @@ exports.updateUserBalanceById = (req, res) => {
       }
     }
   );
-};
+}
 
-exports.getUserById = (userID) => {
+export function getUserById(userID) {
   User.findById(userID, function (err, user) {
     if (err) {
       return;
@@ -107,4 +107,4 @@ exports.getUserById = (userID) => {
       return user;
     }
   });
-};
+}

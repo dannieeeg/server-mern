@@ -1,8 +1,8 @@
-const db = require("../model");
-const Transaction = db.transaction;
-const User = db.user;
+import { transaction, user as _user } from "../model";
+const Transaction = transaction;
+const User = _user;
 
-exports.createTransaction = (acct, amount, tranType, userID) => {
+export function createTransaction(acct, amount, tranType, userID) {
   const now = new Date().toLocaleString("en-US", {
     timeZone: "America/Chicago",
   });
@@ -24,9 +24,9 @@ exports.createTransaction = (acct, amount, tranType, userID) => {
     }
     console.log("trans: " + trans);
   });
-};
+}
 
-exports.getUserTrans = (req, res) => {
+export function getUserTrans(req, res) {
   let transactionsList = [];
 
   //finds the user
@@ -61,4 +61,4 @@ exports.getUserTrans = (req, res) => {
       );
     }
   });
-};
+}

@@ -1,8 +1,8 @@
-const { authJwt } = require("../middleware");
-const controller = require("../controller/user.controller");
-const transController = require("../controller/transaction.controller");
+import { authJwt } from "../middleware";
+import { getById, getUserBalanceById, updateUserBalanceById, getAll } from "../controller/user.controller";
+import { getUserTrans } from "../controller/transaction.controller";
 
-module.exports = function (app) {
+export default function (app) {
   app.use(function (req, res, next) {
     res.header(
       "Access-Control-Allow-Headers",
@@ -12,13 +12,13 @@ module.exports = function (app) {
   });
 
   //find user by ID
-  app.get("/api/user/:id", [authJwt.verifyToken], controller.getById);
+  app.get("/api/user/:id", [authJwt.verifyToken], getById);
 
   //get user balance by id
   app.get(
     "/api/user/balance/:id",
     [authJwt.verifyToken],
-    controller.getUserBalanceById
+    getUserBalanceById
   );
   //update account's balance by id
   /**
@@ -27,19 +27,19 @@ module.exports = function (app) {
   app.put(
     "/api/user/balance/:id",
     [authJwt.verifyToken],
-    controller.updateUserBalanceById
+    updateUserBalanceById
   );
 
   app.get(
     "/api/user/transactions/:id",
     [authJwt.verifyToken],
-    transController.getUserTrans
+    getUserTrans
   );
 
   //get all the accounts
   app.get(
     "/api/user/all/:id",
     [authJwt.verifyToken, authJwt.isAdmin],
-    controller.getAll
+    getAll
   );
 };

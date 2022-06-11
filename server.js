@@ -1,5 +1,5 @@
-const express = require("express");
-const cors = require("cors");
+import express, { json, urlencoded } from "express";
+import cors from "cors";
 
 
 const app = express();
@@ -11,16 +11,16 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
-app.use(express.json());
+app.use(json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+app.use(urlencoded({ extended: true }));
 
-const db = require("../server/model");
-const { dbConfig } = require("./config/db.config");
-const Role = db.role;
+import { role, mongoose } from "../server/model";
+import { dbConfig } from "./config/db.config";
+const Role = role;
 
-db.mongoose
+mongoose
   .connect(`mongodb+srv://dannieeeg:Mit123Coding@mycapstoneproject.qjzqp.mongodb.net/?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

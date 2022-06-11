@@ -1,6 +1,6 @@
-const db = require("../model");
-const ROLES = db.ROLES;
-const User = db.user;
+import { ROLES as _ROLES, user as _user } from "../model";
+const ROLES = _ROLES;
+const User = _user;
 
 checkDuplicateUsernameOrEmail = (req, res, next) => {
   // Email
@@ -42,4 +42,4 @@ const verifySignUp = {
   checkRolesExisted,
 };
 
-module.exports = verifySignUp;
+export default verifySignUp;

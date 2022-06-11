@@ -1,13 +1,13 @@
-const config = require("../config/auth.config");
-const db = require("../model");
-const User = db.user;
-const Role = db.role;
+import { secret } from "../config/auth.config";
+import { user as _user, role as _role } from "../model";
+const User = _user;
+const Role = _role;
 
-var jwt = require("jsonwebtoken");
-var bcrypt = require("bcryptjs");
+import { sign } from "jsonwebtoken";
+import { hashSync, compareSync } from "bcryptjs";
 
 // ---------------------------------- Create Account functionallity ------------------------------
-exports.createAccount = (req, res) => {
+export function createAccount(req, res) {
   //console.log(`createAccount-email : ${req.body.email}`);
   //generate random acct # with 9 digits
   const acct = Math.floor(100000 + Math.random() * 900000000);
@@ -22,7 +22,7 @@ exports.createAccount = (req, res) => {
     dob: new Date(req.body.dob),
     email: req.body.email,
     createdDate: now,
-    password: bcrypt.hashSync(req.body.password, 8),
+    password: hashSync(req.body.password, 8),
     balance: req.body.balance,
   });
 
@@ -74,10 +74,10 @@ exports.createAccount = (req, res) => {
       });
     }
   });
-};
+}
 
 // ---------------------------------- Signin functionallity ------------------------------
-exports.signin = (req, res) => {
+export function signin(req, res) {
   console.log(`Email: ${req.body.email}`);
   User.findOne({
     email: req.body.email,
@@ -93,7 +93,7 @@ exports.signin = (req, res) => {
         return res.status(404).send({ message: "User Not found." });
       }
 
-      var passwordIsValid = bcrypt.compareSync(
+      var passwordIsValid = compareSync(
         req.body.password,
         user.password
       );
@@ -105,7 +105,7 @@ exports.signin = (req, res) => {
         });
       }
 
-      var token = jwt.sign({ id: user.id }, config.secret, {
+      var token = sign({ id: user.id }, secret, {
         expiresIn: 900, // 15 minutes
       });
 
@@ -124,4 +124,4 @@ exports.signin = (req, res) => {
         accessToken: token,
       });
     });
-};
+}
