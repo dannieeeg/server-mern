@@ -9,7 +9,7 @@ const {role} = db;
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://ambitious-pond-0aab98410.1.azurestaticapps.net",
 };
 
 app.use(cors(corsOptions));
