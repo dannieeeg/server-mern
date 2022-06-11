@@ -1,6 +1,9 @@
 import express, { json, urlencoded } from "express";
 import cors from "cors";
 
+import { role, mongoose } from "../server/model";
+import { dbConfig } from "./config/db.config";
+
 
 const app = express();
 
@@ -16,8 +19,7 @@ app.use(json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(urlencoded({ extended: true }));
 
-import { role, mongoose } from "../server/model";
-import { dbConfig } from "./config/db.config";
+
 const Role = role;
 
 mongoose
