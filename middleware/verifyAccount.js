@@ -1,8 +1,6 @@
-import { ROLES as _ROLES, user as _user } from "../model";
-const ROLES = _ROLES;
-const User = _user;
+import User from "../model/user.model.js";
 
-checkDuplicateUsernameOrEmail = (req, res, next) => {
+const checkDuplicateUsernameOrEmail = (req, res, next) => {
   // Email
   User.findOne({
     email: req.body.email,
@@ -22,7 +20,7 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
   // });
 };
 
-checkRolesExisted = (req, res, next) => {
+const checkRolesExisted = (req, res, next) => {
   if (req.body.roles) {
     for (let i = 0; i < req.body.roles.length; i++) {
       if (!ROLES.includes(req.body.roles[i])) {
@@ -42,4 +40,4 @@ const verifySignUp = {
   checkRolesExisted,
 };
 
-export default verifySignUp;
+export const verifyAccount = verifySignUp;

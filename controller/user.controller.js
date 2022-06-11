@@ -1,8 +1,7 @@
-import { user } from "../model";
-import { user as _user, role } from "../model";
-const User = _user;
-const Role = role;
-import { createTransaction } from "./transaction.controller";
+
+
+import User from "../model/user.model.js";
+import { createTransaction } from "./transaction.controller.js";
 
 // ---------------------------------- Find user by ID ------------------------------
 export function getById(req, res) {

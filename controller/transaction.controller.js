@@ -1,6 +1,6 @@
-import { transaction, user as _user } from "../model";
-const Transaction = transaction;
-const User = _user;
+import Transaction from "../model/transaction.model.js";
+import User from "../model/user.model.js";
+
 
 export function createTransaction(acct, amount, tranType, userID) {
   const now = new Date().toLocaleString("en-US", {

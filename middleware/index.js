@@ -1,7 +1,3 @@
-import authJwt from "./authJwt";
-import verifyAccount from "./verifyAccount";
+export * from "./authJwt.js";
+export *  from "./verifyAccount.js";
 
-export default {
-  authJwt,
-  verifyAccount,
-};

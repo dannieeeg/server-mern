@@ -1,7 +1,7 @@
-import { verifyAccount } from "../middleware";
-import { createAccount, signin } from "../controller/auth.controller";
+import { verifyAccount } from "../middleware/index.js";
+import { createAccount, signin } from "../controller/auth.controller.js";
 
-export default function (app) {
+export default function authRoutes(app) {
   app.use(function (req, res, next) {
     res.header(
       "Access-Control-Allow-Headers",

@@ -1,9 +1,3 @@
-module.exports = {
-  secret: "badbank-secret-key",
-  //jwtExpiration: 3600, // 1 hour
-  // jwtRefreshExpiration: 86400, // 24 hours
-
-  /* for test */
-  jwtExpiration: 60, // 1 minute
-  jwtRefreshExpiration: 120, // 2 minutes
-};
+export const secret = "badbank-secret-key";
+export const jwtExpiration = 60;
+export const jwtRefreshExpiration = 120;

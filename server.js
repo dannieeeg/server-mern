@@ -1,9 +1,10 @@
 import express, { json, urlencoded } from "express";
 import cors from "cors";
+import authRoutes from "./routes/auth.routes.js";
+import userRoutes from "./routes/user.routes.js";
+import db from "./model/index.js";
 
-import { role, mongoose } from "../server/model";
-import { dbConfig } from "./config/db.config";
-
+const {role} = db;
 
 const app = express();
 
@@ -22,7 +23,7 @@ app.use(urlencoded({ extended: true }));
 
 const Role = role;
 
-mongoose
+db.mongoose
   .connect(`mongodb+srv://dannieeeg:Mit123Coding@mycapstoneproject.qjzqp.mongodb.net/?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -42,8 +43,8 @@ app.get("/", (req, res) => {
 });
 
 // routes
-require("../server/routes/auth.routes")(app);
-require("../server/routes/user.routes")(app);
+authRoutes(app);
+userRoutes(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

@@ -1,10 +1,13 @@
-import { secret } from "../config/auth.config";
-import { user as _user, role as _role } from "../model";
-const User = _user;
-const Role = _role;
+import { secret } from "../config/auth.config.js";
 
-import { sign } from "jsonwebtoken";
-import { hashSync, compareSync } from "bcryptjs";
+
+
+import pkgs from 'jsonwebtoken';
+const { sign } = pkgs;
+import pkg from 'bcryptjs';
+const { hashSync, compareSync } = pkg;
+import User from "../model/user.model.js";
+import Role from "../model/role.model.js";
 
 // ---------------------------------- Create Account functionallity ------------------------------
 export function createAccount(req, res) {

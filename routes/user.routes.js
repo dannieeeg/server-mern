@@ -1,8 +1,8 @@
-import { authJwt } from "../middleware";
-import { getById, getUserBalanceById, updateUserBalanceById, getAll } from "../controller/user.controller";
-import { getUserTrans } from "../controller/transaction.controller";
+import { authJwt } from "../middleware/index.js";
+import { getById, getUserBalanceById, updateUserBalanceById, getAll } from "../controller/user.controller.js";
+import { getUserTrans } from "../controller/transaction.controller.js";
 
-export default function (app) {
+export default function userRoutes(app) {
   app.use(function (req, res, next) {
     res.header(
       "Access-Control-Allow-Headers",

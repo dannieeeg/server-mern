@@ -1,10 +1,11 @@
-import { verify } from "jsonwebtoken";
+import pkg from "jsonwebtoken";
 import { secret } from "../config/auth.config.js";
-import { user as _user, role } from "../model";
-const User = _user;
-const Role = role;
+import Role from "../model/role.model.js";
+import User from "../model/user.model.js";
 
-verifyToken = (req, res, next) => {
+const { verify } = pkg;
+
+const verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"];
 
   if (!token) {
@@ -20,7 +21,7 @@ verifyToken = (req, res, next) => {
   });
 };
 
-isAdmin = (req, res, next) => {
+const isAdmin = (req, res, next) => {
   User.findById(req.userId).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
@@ -51,8 +52,8 @@ isAdmin = (req, res, next) => {
   });
 };
 
-const authJwt = {
+ export const authJwt = {
   verifyToken,
   isAdmin,
 };
-export default authJwt;
+

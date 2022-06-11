@@ -1,10 +1,11 @@
-const mongoose = require("mongoose");
+import pkg from "mongoose";
+const {model, Schema} = pkg
 
-const Role = mongoose.model(
+const Role = model(
   "Role",
-  new mongoose.Schema({
+  new Schema({
     name: String,
   })
 );
 
-module.exports = Role;
+export default Role;

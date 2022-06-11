@@ -1,13 +1,14 @@
-const mongoose = require("mongoose");
+import pkg from "mongoose";
+const {model, Schema} = pkg
 
-const Transaction = mongoose.model(
+const Transaction = model(
   "Transaction",
-  new mongoose.Schema({
+  new Schema({
     tranType: String,
     tranNumber: Number,
     amount: Number,
     userID: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
     },
     createdDate: Date,
@@ -15,4 +16,4 @@ const Transaction = mongoose.model(
   })
 );
 
-module.exports = Transaction;
+export default Transaction;
